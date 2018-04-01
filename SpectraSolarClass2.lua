@@ -57,7 +57,7 @@ end
 function ZSpectralGenerator:BuildingUpdate(time)
 	self:AccumulateDust()
 	self:SetBase("electricity_production", self:GetClassValue ("electricity_production") * self.production_factor_interacted / (self:energyLoss() + self:energyStormLoss()))
-	RebuildInfopanel(self)
+	RebuildInfopanel(self) -- need to fix the aritmetica from this thing above
 end -- Working Fuction updating correctly
 
 
