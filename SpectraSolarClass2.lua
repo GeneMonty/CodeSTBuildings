@@ -56,8 +56,8 @@ end
 
 function ZSpectralGenerator:BuildingUpdate(time)
 	self:AccumulateDust()
-	self:SetBase("electricity_production", self:GetClassValue ("electricity_production") * self.production_factor_interacted / (self:energyLoss() + self:energyStormLoss()))
-	RebuildInfopanel(self) -- need to fix the aritmetica from this thing above
+	self:SetBase("electricity_production", self:GetClassValue ("electricity_production") / self:energyStormLoss() * self.production_factor_interacted / (self:energyLoss()))
+	RebuildInfopanel(self) --
 end -- Working Fuction updating correctly
 
 
@@ -153,22 +153,21 @@ function ZSpectralGenerator:OnSetWorking(working)
 	ElectricityProducer.OnSetWorking(self, working)
 	self:OnChangeState()
 end
-
+--trying to play sound when object is working function (not working yet)
 function ZSpectralGenerator:UpdateSound(PlayFX)
 
 	if self:IsOpened() then PlayFX("Object MoistureVaporator Loop", self) else
 	PlayFX("ItemSelectorIn", "start")
 
-
 	end
 end
-
 
 --function ZSpectralGenerator:GetAdditionalProduction()
 --local optimal_production = self.electricity_production * self.production_factor_interacted / --self.energyBonus
 --return optimal_production - self.electricity.production
 --end
 
+--[[The Start of my Custom Fuctions ]]
 
 --SpectraFuction of Time Update
 
@@ -176,45 +175,30 @@ function OnMsg.NewHour()
 	SpectraCurrentHour = UICity.hour
 end
 
---Spectra Function of Energy Control
-function ZSpectralGenerator:energyBonus()
-
-	if SpectraCurrentHour < 7 then
-		energyBonus = 200
-		elseif SpectraCurrentHour > 19 then
-		energyBonus = 200
-		else
-		energyBonus = 100
-	end
-	return energyBonus
-end
-
---Spectra Function of Energy Control
-
--- function ZSpectralGenerator:energyLoss()
---
--- 	if SpectraCurrentHour < 5 then energyLoss = 200
--- 	elseif SpectraCurrentHour > 20 then energyLoss = 200
--- 	else energyLoss = 100
--- 	end
--- 	return energyLoss
--- end
+--Spectra Function of Energy Calculate Energy Loss by hour
 function ZSpectralGenerator:energyLoss()
-	if SpectraCurrentHour > 15 and SpectraCurrentHour < 5 then energyLoss = 200
-	elseif SpectraCurrentHour <14 and SpectraCurrentHour> 6 then energyLoss = 100
+
+	if SpectraCurrentHour < 5 then energyLoss = 200
+	elseif SpectraCurrentHour > 18 then energyLoss = 200
+	else energyLoss = 100
 	end
 	return energyLoss
 end
-
-
-
+--DustStorm Affects Production inside and outside Dome.
 function ZSpectralGenerator:energyStormLoss()
 	if g_DustStorm then
-		energyStormLoss = 200
-	else energyStormLoss = 100
+		energyStormLoss = 3
+	else energyStormLoss = 1
 	end
 	return energyStormLoss
 end
+
+-- function OnMsg.Coldwave()
+-- 	self:SetBase("electricity_production", self.GetClassValue("electricity_production") * 3)
+-- end
+
+
+
 
 
 -- function ZSpectralGenerator:GetHeatRange()
@@ -222,4 +206,17 @@ end
 -- end
 -- function ZSpectralGenerator:GetHeatBorder()
 -- 	return const.SubsurfaceHeaterFrameRange
+-- end
+
+--Spectra Function of Energy Control old code
+-- function ZSpectralGenerator:energyBonus()
+--
+-- 	if SpectraCurrentHour < 7 then
+-- 		energyBonus = 200
+-- 		elseif SpectraCurrentHour > 19 then
+-- 		energyBonus = 200
+-- 		else
+-- 		energyBonus = 100
+-- 	end
+-- 	return energyBonus
 -- end
