@@ -17,8 +17,8 @@ function OnMsg.ClassesBuilt()
 
 	name = T({"Spectra-Mars Division"}),
 
-	img = stdir.."UI/st_menu3.tga",
-	highlight_img = stdir.."UI/st_menu3.tga"
+	img = stdir.."UI/st_menu10.tga",
+	highlight_img = stdir.."UI/st_menu10.tga"
 
 	--img = "UI/Icons/bmc_power.tga",
 	--highlight_img = "UI/Icons/bmc_power.tga"
