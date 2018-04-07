@@ -17,8 +17,8 @@ function OnMsg.ClassesBuilt()
 
 	name = T({"Spectra-Mars Division"}),
 
-	img = stdir.."UI/st_menu10.tga",
-	highlight_img = stdir.."UI/st_menu10.tga"
+	img = stdir.."UI/st_menu19.tga",
+	highlight_img = stdir.."UI/st_menu19.tga"
 
 	--img = "UI/Icons/bmc_power.tga",
 	--highlight_img = "UI/Icons/bmc_power.tga"
@@ -26,3 +26,6 @@ function OnMsg.ClassesBuilt()
 	})
 
 end
+--[[icons that look good
+st_menu14.tga
+st_menu19.tga]]
