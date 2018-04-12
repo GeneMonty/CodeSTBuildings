@@ -152,7 +152,33 @@ end
 function ZSpectralGenerator:OnSetWorking(working)
 	ElectricityProducer.OnSetWorking(self, working)
 	self:OnChangeState()
+
+	--This part below should play a Sound when building is On/Off
+		if self.working
+		  then
+		    PlayFX("Spawn","start","SensorTower")
+		    PlayFX("SelectObj","start","AlienDigger")
+		  elseif not self.working
+		  then
+		      PlayFX("SelectObj","start","AlienDigger")
+		    end
+----------------------------------------------------------------
 end
+
+---------------------------------------------------------------
+---@@ This fuction is to play sounds when object is selected.
+function OnMsg.SelectedObjChange(obj, prev)
+    if IsKindOf(obj, "ZSpectralGenerator") then
+    PlayFX("SelectObj", "start","PowerDecoy","UI")
+    PlayFX("SelectObj", "start","RCRover","UI")
+    PlayFX("UINotificationBreaktrough", "start")
+    end
+end
+----------------------------------------------------------------
+
+
+
+
 --@@ Trying to play sound when object is working function (not working yet)
 -- function ZSpectralGenerator:UpdateSound(PlayFX)
 --
