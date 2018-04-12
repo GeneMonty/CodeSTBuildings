@@ -153,30 +153,14 @@ function ZSpectralGenerator:OnSetWorking(working)
 	ElectricityProducer.OnSetWorking(self, working)
 	self:OnChangeState()
 end
---@@ Trying to play sound when object is working function (not working yet)
--- function ZSpectralGenerator:UpdateSound(PlayFX)
---
--- 	if self:IsOpened() then PlayFX("Object MoistureVaporator Loop", self) else
--- 	PlayFX("ItemSelectorIn", "start")
---
--- 	end
--- end
+--trying to play sound when object is working function (not working yet)
+function ZSpectralGenerator:UpdateSound(PlayFX)
 
--- function ZSpectralGenerator:UpdateAnimSound()
--- 	self.opened=CreateGameTimeThread(function()
---
--- 		local anim=self:GetStateText()
--- 		if anim ~= "idle" then Sleep(self:TimeToAnimEnd())
--- 		end
---
---
--- 	local opened=self:IsOpened()
--- 	local current_state=GetStateName(self:GetState())
---
--- 	if opened and current_state =="idle" then return PlayFX("StirlingGenerator", opened and "open_start" or "close_start",self)
--- 	end
--- end
+	if self:IsOpened() then PlayFX("Object MoistureVaporator Loop", self) else
+	PlayFX("ItemSelectorIn", "start")
 
+	end
+end
 
 --function ZSpectralGenerator:GetAdditionalProduction()
 --local optimal_production = self.electricity_production * self.production_factor_interacted / --self.energyBonus
