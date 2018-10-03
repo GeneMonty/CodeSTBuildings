@@ -9,6 +9,7 @@ this_mod_dir.."UI/st_menu.tga"
 ]]
 
 function OnMsg.ClassesBuilt()
+	--if table.find_id("SPECTRA Build Menu") ~= nil then --
 
 	stdir = Mods["GxtLPqt"]:GetModRootPath()
 
@@ -23,7 +24,7 @@ function OnMsg.ClassesBuilt()
 	--img = "UI/Icons/bmc_power.tga",
 	--highlight_img = "UI/Icons/bmc_power.tga"
 
-	})
+}) --else end --
 
 end
 --[[icons that look good
