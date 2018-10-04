@@ -1,3 +1,19 @@
+--[[
+
+SpectraSolarClass.lua is the current code of the STConduit.
+
+Features
+Implemented= [+] // Not implemented [ ]
+
+Energy production
+
+[+]Solar Energy
+[+]Reduced Production at night.
+[+]Reduced production caused by disasters
+[+]Place in Dome
+
+]]
+
 DefineClass.ZSpectralGenerator = {
 	__parents = {
 		"ElectricityProducer"
@@ -166,7 +182,7 @@ function ZSpectralGenerator:OnSetWorking(working)
 end
 
 ---------------------------------------------------------------
----@@ This fuction is to play sounds when object is selected.
+---@@ This fuction should play sounds when object is selected.
 function OnMsg.SelectedObjChange(obj, prev)
     if IsKindOf(obj, "ZSpectralGenerator") then
     PlayFX("SelectObj", "start","PowerDecoy","UI")
@@ -209,15 +225,16 @@ end
 --return optimal_production - self.electricity.production
 --end
 
+--------------------------------------
 --[[The Start of my Custom Fuctions ]]
-
+--------------------------------------
 --SpectraFuction of Time Update
 
 function OnMsg.NewHour()
 	SpectraCurrentHour = UICity.hour
 end
 
---Spectra Function of Energy Calculate Energy Loss by hour
+--Spectra Function to Calculate Energy Loss by time
 function ZSpectralGenerator:energyLoss()
 
 	if SpectraCurrentHour < 5 then energyLoss = 200

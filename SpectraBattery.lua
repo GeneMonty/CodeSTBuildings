@@ -1,3 +1,51 @@
+--[[
+
+SpectraBattery.lua is the current code of the STBattery.
+
+Features
+Implemented= [+] // Not implemented [ ]
+
+Battery
+[]Energy charge
+[]Energy discharge
+
+Heat
+[ ]50% heat radius when charging
+[ ]100% radius when fully charged
+[ ]50% radius when Discharging
+
+]]
+
+--New Code implementation UNTESTED
+
+DefineClass.ZSpectraBattery = {
+  __parents={"ElectricityStorage","BaseHeater"},
+  heat=2*const.MaxHeat,
+}
+
+function ZSpectraBattery:OnModifiableValueChanged(...)
+  ElectricityStorage.OnModifiableValueChanged(self,...)
+
+  if self.electricity then
+    self.electricity:SetStorage(self.max_electricity_charge,
+    self.max_electricity_discharge)
+  end
+end
+
+--Heat Generation code
+
+ZSpectraBattery.GetHeatRange = MoholeMine.GetHeatRange
+ZSpectraBattery.GetHeatRange = MoholeMine.GetHeatBorder
+ZSpectraBattery.GetHeatRange = MoholeMine.GetSelectionRadiusScale
+
+
+
+
+
+
+--[[
+
+
 DefineClass.ZSpectraBattery = {
   __parents={"Building","ElectricityGridObject","BaseHeater"},
 
@@ -221,7 +269,7 @@ end
 function ZSpectraBattery:GetStoredPower()
 	return self.electricity.current_storage
 end
---[[HEATCODE FROM MOHOLE MINE]]
+--[[HEATCODE FROM MOHOLE MINE
 function ZSpectraBattery:GetHeatRange()
 	return const.ZSpectraBatteryHeatRadius * 10 * guim
 end
