@@ -231,7 +231,7 @@ end
 --SpectraFuction of Time Update
 
 function OnMsg.NewHour()
-	SpectraCurrentHour = UICity.hour
+	SpectraCurrentHour = UICity.hour -- SpectraCurrentHour gets UICity.Hour
 end
 
 --Spectra Function to Calculate Energy Loss by time
