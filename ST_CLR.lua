@@ -18,18 +18,20 @@ Simply put The CL will generate water based on the maximum used on the colony, t
 
 ]]
 
-DefineClass.zCloseLoop={
-__parents={"WaterProducer","ElectricityConsumer","ResourceProducer"},
-},
+DefineClass.zCloseLoop = {
+    __parents = {
+        "WaterProducer","ElectricityConsumer","ResourceProducer"
+    },
+}
+
+function zCloseLoop:GameInit()
+        self.enabled=true,
+        self.accumulate_dust = not self:IsObjInDome(self)
+        self.city=self.city or UICity
+end
 
 function zCloseLoop:BuildingUpdate()
         RebuildInfopanel(self)
-end
-
-function zCloseLoop:GameInit()
-    self.enabled=true,
-    self.accumulate_dust = not self:IsObjInDome(self)
-    self.city=self.city or UICity
 end
 
 function zCloseLoop.OnSetWorking(working)
