@@ -21,6 +21,9 @@ Heat
 DefineClass.ZSpectraBattery = {
   __parents={"ElectricityStorage","BaseHeater"},
   heat=2*const.MaxHeat,
+  ZSpectraBattery.GetHeatRange = MoholeMine.GetHeatRange,
+  ZSpectraBattery.GetHeatRange = MoholeMine.GetHeatBorder,
+  ZSpectraBattery.GetHeatRange = MoholeMine.GetSelectionRadiusScale,
 }
 
 function ZSpectraBattery:OnModifiableValueChanged(...)
@@ -32,11 +35,13 @@ function ZSpectraBattery:OnModifiableValueChanged(...)
   end
 end
 
+function
+
 --Heat Generation code
 
-ZSpectraBattery.GetHeatRange = MoholeMine.GetHeatRange
-ZSpectraBattery.GetHeatRange = MoholeMine.GetHeatBorder
-ZSpectraBattery.GetHeatRange = MoholeMine.GetSelectionRadiusScale
+-- ZSpectraBattery.GetHeatRange = MoholeMine.GetHeatRange
+-- ZSpectraBattery.GetHeatRange = MoholeMine.GetHeatBorder
+-- ZSpectraBattery.GetHeatRange = MoholeMine.GetSelectionRadiusScale
 
 
 
