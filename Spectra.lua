@@ -14,15 +14,15 @@ and populate the Spectra Menu and Icon.
 
 function OnMsg.ClassesBuilt()
 
-    stdir = CurrentModPath.."UI/st_menu19.tga"
+    stdir = CurrentModPath.."UI/st_menu19.tga" -- Maybe "UI/" if img are diff.
 
     table.insert(
         BuildCategories,
         {
             id ="SPECTRA Build Menu",
             name = T{"Spectra-Mars Division"},
-            img = stdir,
-            highlight_img = stdir,
+            img = stdir, --stdir.."st_menu14.tga" -maybe?
+            highlight_img = stdir, --stdir.."st_menu19.tga" -maybe?
         }
     )
 end
