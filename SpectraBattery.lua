@@ -19,12 +19,33 @@ Heat
 --New Code implementation UNTESTED
 
 DefineClass.ZSpectraBattery = {
-  __parents={"ElectricityStorage","BaseHeater"},
-  heat=2*const.MaxHeat,
-  ZSpectraBattery.GetHeatRange = MoholeMine.GetHeatRange,
-  ZSpectraBattery.GetHeatRange = MoholeMine.GetHeatBorder,
-  ZSpectraBattery.GetHeatRange = MoholeMine.GetSelectionRadiusScale,
+  __parents={
+      "ElectricityStorage",
+      "BaseHeater",
+      "Building","ElectricityGridObject"
+  },
+
+    building_update_time = 5000,
+    mode = "charging", -- "empty", "full", "charging", "discharging"
+    cur_phase = false,
+    --fx
+    play_fx_on_next_update = false,
+    last_fx_moment = false,
+
+    deflate_on_constructed = true,
+
+    pin_progress_value = "StoredPower",
+    pin_progress_max = "capacity",
+    heat=2*const.MaxHeat,
+
+
+
 }
+
+function ZSpectraBattery:GameInit(...)
+
+end
+
 
 function ZSpectraBattery:OnModifiableValueChanged(...)
   ElectricityStorage.OnModifiableValueChanged(self,...)
@@ -35,10 +56,11 @@ function ZSpectraBattery:OnModifiableValueChanged(...)
   end
 end
 
-function
+
 
 --Heat Generation code
 
+-- heat=2*const.MaxHeat,
 -- ZSpectraBattery.GetHeatRange = MoholeMine.GetHeatRange
 -- ZSpectraBattery.GetHeatRange = MoholeMine.GetHeatBorder
 -- ZSpectraBattery.GetHeatRange = MoholeMine.GetSelectionRadiusScale
