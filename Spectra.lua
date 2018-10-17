@@ -8,7 +8,7 @@ and populate the Spectra Menu and Icon.
 
 -----------------------------------
 --Updated Spectra Build Menu Code
---thanks to ChoGGi
+--Thanks to ChoGGi
 -----------------------------------
 
 
