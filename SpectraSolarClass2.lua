@@ -3,14 +3,17 @@
 SpectraSolarClass.lua is the current code of the STConduit.
 
 Features
-Implemented= [+] // Not implemented [ ]
+	Implemented= [+] // Not implemented [ ]
+
+Placement
+	[+]Place in Dome
 
 Energy production
+	[+]Solar Energy
+	[+]Reduced Production at night.
+	[+]Reduced production caused by Dust storm disaster
+	[ ]Cold wave increse of production (Cold Increases Efficiency of Conduit)
 
-[+]Solar Energy
-[+]Reduced Production at night.
-[+]Reduced production caused by disasters
-[+]Place in Dome
 
 ]]
 
@@ -81,7 +84,7 @@ end -- Working Fuction updating correctly
 -- 	self:AccumulateDust()
 -- 	self:SetBase("electricity_production", self:GetClassValue("electricity_production") *  self.production_factor_interacted / self:energyLoss() * self:energymidBonus())
 -- 	RebuildInfopanel(self)
--- 	--This is very Important for update energy.
+-- 	--This is very Important for update energy.-Deprecated
 -- end
 
 function ZSpectralGenerator:OnChangeState(foo)
@@ -98,9 +101,11 @@ function ZSpectralGenerator:OnChangeState(foo)
 	end
 	RebuildInfopanel(self)
 end
+
 function ZSpectralGenerator:OnUpgradeToggled()
 	self:OnChangeState(true)
 end
+
 function ZSpectralGenerator:AccumulateDust()
 	if self.time_opened_start then
 		local delta = GameTime() - self.time_opened_start
@@ -108,9 +113,12 @@ function ZSpectralGenerator:AccumulateDust()
 	end
 	self.time_opened_start = self:IsOpened() and GameTime() or false
 end
+
 function ZSpectralGenerator:IsOpened()
 	return self.opened and self.working
 end
+
+
 --[[function ZSpectralGenerator:UpdateAnim()
 	DeleteThread(self.open_close_thread)
 	self.open_close_thread = CreateGameTimeThread(function()
@@ -143,6 +151,8 @@ end
 		end
 	end)
 end]]
+
+
 function ZSpectralGenerator:ToggleOpenedState(broadcast)
 	local opened = not self.opened
 	if broadcast then
@@ -162,9 +172,13 @@ function ZSpectralGenerator:ToggleOpenedState(broadcast)
 	end
 	RebuildInfopanel(self)
 end
+
+
 function ZSpectralGenerator:GetUIOpenStatus()
 	return self:IsOpened() and T({7356, "Open"}) or T({7357, "Closed"})
 end
+
+
 function ZSpectralGenerator:OnSetWorking(working)
 	ElectricityProducer.OnSetWorking(self, working)
 	self:OnChangeState()
@@ -178,11 +192,13 @@ function ZSpectralGenerator:OnSetWorking(working)
 		  then
 		      PlayFX("SelectObj","start","AlienDigger")
 		    end
-----------------------------------------------------------------
 end
 
----------------------------------------------------------------
----@@ This fuction should play sounds when object is selected.
+
+----------------------------------------------------------------
+---This fuction should play sounds when object is selected.-----
+---Not Completely working as expected - Experimental------------
+----------------------------------------------------------------
 function OnMsg.SelectedObjChange(obj, prev)
     if IsKindOf(obj, "ZSpectralGenerator") then
     PlayFX("SelectObj", "start","PowerDecoy","UI")
@@ -191,7 +207,7 @@ function OnMsg.SelectedObjChange(obj, prev)
     end
 end
 ----------------------------------------------------------------
-
+----------------------------------------------------------------
 
 
 
@@ -243,6 +259,7 @@ function ZSpectralGenerator:energyLoss()
 	end
 	return energyLoss
 end
+
 --DustStorm Affects Production inside and outside Dome.
 function ZSpectralGenerator:energyStormLoss()
 	if g_DustStorm then
