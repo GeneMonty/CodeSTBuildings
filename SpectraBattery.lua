@@ -1,5 +1,7 @@
 --[[
 
+DEPRECATED 
+
 SpectraBattery.lua is the current code of the STBattery.
 
 Features
