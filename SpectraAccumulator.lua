@@ -15,12 +15,18 @@ Heat
 [ ]80% radius when fully charged
 [ ]50% radius when Discharging
 
+UI Stuff
+[ ] Display current Heat % at Infopannel
+[ ] Display Heat Range on Ground while Selected 
+
 ]]
 
 DefineClass.ZSpectraAccumulator = {
     __parents = {
         "ElectricityStorage",
         "BaseHeater"
+        -- "SubsurfaceHeater"
+
     },
 
     heat = 2*const.MaxHeat
