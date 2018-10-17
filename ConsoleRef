@@ -1,0 +1,11 @@
+Console Reference
+
+ReloadLua() --Reloads Lua Code
+cls() --Clears Console
+CheatCompleteAllConstructions()
+
+
+CheatToggleInfopanelCheats()
+CheatUnlockAllBuildings()
+CheatUnlockAllTech()
+CheatStopDisaster()
