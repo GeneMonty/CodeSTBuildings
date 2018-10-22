@@ -77,6 +77,7 @@ function ZSpectralGenerator:BuildingUpdate(time)
 	self:AccumulateDust()
 	self:SetBase("electricity_production", self:GetClassValue ("electricity_production") / self:energyStormLoss() * self.production_factor_interacted / (self:energyLoss()))
 	RebuildInfopanel(self) --
+	-- print(energyLoss.."EnergyLoss")--debug
 end -- Working Fuction updating correctly
 
 
