@@ -4,8 +4,46 @@ ReloadLua() --Reloads Lua Code
 cls() --Clears Console
 CheatCompleteAllConstructions()
 
+StartColdWave(settings, endless)
 
 CheatToggleInfopanelCheats()
 CheatUnlockAllBuildings()
 CheatUnlockAllTech()
 CheatStopDisaster()
+
+
+
+
+--BuildingUpdte Fucntion
+function ZSpectraAccumulator:BuildingUpdate(dt, day, hour)
+	if self.opened and not self:CanBeOpened() then
+		self:SetOpenState(false)
+	end
+end
+
+very important function
+"That's the function that creates the building update thread
+It has an interval of building_update_time
+And calls BuildingUpdate recursively"
+
+function Building:StartUpdateThread(randomize_tick)
+	if not self.building_update_time then return end
+	self.update_thread = CreateGameTimeThread(function(self, randomize_tick)
+		if randomize_tick then
+			Sleep( InteractionRand(max_int, "randomize_tick") % self.building_update_time + 1)
+		end
+		local last_day
+		local city = self.city
+		local delta = 0
+		while IsValid(self) do
+			local day = city.day
+			self:RecursiveCall(true, "BuildingUpdate", delta, day, city.hour) --parents first
+			if IsValid(self) and last_day ~= day then
+				last_day = day
+				self:RecursiveCall(true, "BuildingDailyUpdate", day)
+			end
+			delta = self.building_update_time
+			Sleep(delta)
+		end
+	end, self, randomize_tick)
+end
