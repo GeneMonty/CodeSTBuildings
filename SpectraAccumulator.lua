@@ -3,21 +3,27 @@
 SpectraAccumulator.lua is the current code of the STBattery(Spectra Accumulator).
 
 Features
-    Implemented= [+] // Not implemented [ ]
+        Implemented [+]  Disabled [-]
+        Bug [!] Development [x]
 
 Battery
-    [+]Energy charge
-    [+]Energy discharge
+        [+] Energy charge
+        [+] Energy discharge
 
 Heat
-    [x]Heat Production
-    [x]100% heat radius when charging
-    [x]80% radius when fully charged
-    [x]100% radius when Discharging
+        [+] Heat Production
+        [x] 100% heat radius when charging
+        [x] 80% radius when fully charged
+        [x] 100% radius when Discharging
 
 UI Stuff
-    [ ] Display current Heat % at Infopannel
-    [ ] Display Heat Range on Ground while Selected
+        [ ] Display current Heat % at Infopannel
+        [ ] Display Heat Range on Ground while Selected
+
+Sound Stuff
+        [ ] Play sound on Selection
+        [ ] Play sound while active
+
 
 ]]
 
@@ -33,6 +39,8 @@ DefineClass.ZSpectraAccumulator = {
 
     -- mode = "charging", -- "empty", "full", "charging", "discharging"
 }
+
+--Special Thanks to Biser for providing valuable information and knowledge
 
 function ZSpectraAccumulator:GetHeatRange() --Gets Heat Range Values
     if self.mode == "full" then
