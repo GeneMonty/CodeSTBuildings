@@ -1,7 +1,7 @@
 
 --[[
 
-Spectra.lua is used to call the mod directory,
+SpectraMenu.lua is used to call the mod directory,
 and populate the Spectra Menu and Icon.
 
 ]]
