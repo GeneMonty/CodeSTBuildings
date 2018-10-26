@@ -78,7 +78,7 @@ function ZSpectralGenerator:BuildingUpdate(time)
 	self:SetBase("electricity_production", self:GetClassValue ("electricity_production") / self:energyStormLoss() * self.production_factor_interacted / (self:energyLoss()))
 	RebuildInfopanel(self) --
 	-- print(energyLoss.."EnergyLoss")--debug
-end -- Working Fuction updating correctly
+end -- Working Fuction updating correctly to Calculate energy output
 
 
 -- function ZSpectralGenerator:BuildingUpdate(dt, day, hour)
@@ -101,11 +101,11 @@ function ZSpectralGenerator:OnChangeState(foo)
 		self:UpdateAnim()
 	end
 	RebuildInfopanel(self)
-end
+end --dont remember what this function was used for.
 
 function ZSpectralGenerator:OnUpgradeToggled()
 	self:OnChangeState(true)
-end
+end--probably not actually working
 
 function ZSpectralGenerator:AccumulateDust()
 	if self.time_opened_start then
@@ -113,11 +113,11 @@ function ZSpectralGenerator:AccumulateDust()
 		self:AddDust(MulDivTrunc(self.daily_dust_accumulation, delta, const.DayDuration))
 	end
 	self.time_opened_start = self:IsOpened() and GameTime() or false
-end
+end-- should not be needed on new code
 
 function ZSpectralGenerator:IsOpened()
 	return self.opened and self.working
-end
+end--should not be needed in new code
 
 
 --[[function ZSpectralGenerator:UpdateAnim()
@@ -172,7 +172,7 @@ function ZSpectralGenerator:ToggleOpenedState(broadcast)
 		self:OnChangeState()
 	end
 	RebuildInfopanel(self)
-end
+end-- not sure what this was
 
 
 function ZSpectralGenerator:GetUIOpenStatus()
@@ -193,7 +193,7 @@ function ZSpectralGenerator:OnSetWorking(working)
 		  then
 		      PlayFX("SelectObj","start","AlienDigger")
 		    end
-end
+end -- experimental audio playback on setworking (on/off) function
 
 
 ----------------------------------------------------------------
@@ -206,7 +206,7 @@ function OnMsg.SelectedObjChange(obj, prev)
     PlayFX("SelectObj", "start","RCRover","UI")
     PlayFX("UINotificationBreaktrough", "start")
     end
-end
+end -- experimental audio function on selected function
 ----------------------------------------------------------------
 ----------------------------------------------------------------
 
