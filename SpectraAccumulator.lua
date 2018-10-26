@@ -1,9 +1,8 @@
---[[
-
+--[[ v.1.20
 SpectraAccumulator.lua is the current code of the STBattery(Spectra Accumulator).
 
 Features
-        Implemented [+]  Disabled [-]
+        Implemented [+]  Not Implemented [ ] Disabled [-]
         Bug [!] Development [x]
 
 Battery
@@ -12,17 +11,18 @@ Battery
 
 Heat
         [+] Heat Production
-        [x] 100% heat radius when charging
-        [x] 80% radius when fully charged
-        [x] 100% radius when Discharging
+        [+] 120% heat radius when charging
+        [+] 120% radius when Discharging
+        [+] 100% radius when fully charged
 
 UI Stuff
-        [ ] Display current Heat % at Infopannel
-        [ ] Display Heat Range on Ground while Selected
+        [x] Display Plop Default Heat Range Border
+        [!] Display Current Heat Range while Selected
+        [] Display current Heat % at Infopannel
 
 Sound Stuff
-        [ ] Play sound on Selection
-        [ ] Play sound while active
+        [] Play sound on Selection
+        [] Play sound while active
 
 
 ]]
@@ -30,138 +30,71 @@ Sound Stuff
 DefineClass.ZSpectraAccumulator = {
     __parents = {
         "ElectricityStorage",
-        "BaseHeater"
-        -- "SubsurfaceHeater"
+        "BaseHeater",
+        "UIRangeBuilding"
 
     },
 
     heat = 2*const.MaxHeat,
-
+    UIRange = 10  --result, needs a small value, GetHeatRange output value is to high
     -- mode = "charging", -- "empty", "full", "charging", "discharging"
 }
 
---Special Thanks to Biser for providing valuable information and knowledge
+--------<
+-- Heat
+--------<
+function ZSpectraAccumulator:GetHeatRange() -- Gets heat range from Values
+        local result = 0
 
-function ZSpectraAccumulator:GetHeatRange() --Gets Heat Range Values
-    if self.mode == "full" then
-        return 10 * 8 * guim
-    elseif self.mode == "charging" or
-           self.mode == "discharging" then
-        return 10 * 10 * guim
-    elseif self.mode == "empty" then
-        return 0
-    end
+        if self.mode =="full" then
+                result = 10 * 10 * guim
+        elseif self.mode == "charging" or
+                self.mode == "discharging" then
+                result = 10 * 12 * guim
+        elseif self.mode == "empty"  then
+                result = 0
+        end
+        -- self.UIRange = result
+        return result
 end
 
-function ZSpectraAccumulator:GetHeatBorder()--gets heat border?
-    return const.SubsurfaceHeaterFrameRange
+--Important function to enable heat change on condition in realtime
+
+function ZSpectraAccumulator:SetStorageState(resource, state, ...) --override ElectricityStorage by our own.
+        ElectricityStorage.SetStorageState(self, resource, state, ...)
+        if self.working then --Apply Heat change in realtime
+                self:ApplyHeat(false)
+                self:ApplyHeat(true)
+                -- self:GetHeatRange()--self:UpdateHeatingRangeHere() --GetHeatRange()
+        end
 end
 
-function ZSpectraAccumulator:GetSelectionRadiusScale() --gets MineRadius?
-    return const.MoholeMineHeatRadius
+-- GetHeatBorder() and GetSelectionRadiusScale() is currently disabled because is not working correctly for our needs.
+-- function ZSpectraAccumulator:GetHeatBorder(...)--Returns heat border ?
+--         SubsurfaceHeater:GetHeatBorder(self,...)
+--         return UIRange
+-- --     -- return const.SubsurfaceHeaterFrameRange
+-- --     -- return SpectraBorder
+-- end
+-- -- -- --
+-- function ZSpectraAccumulator:GetSelectionRadiusScale() --Returns Selection Radius Scale?
+--     -- return self:GetHeatRange() --crash
+--     -- return const.MoholeMineHeatRadius
+--     return UIRange
+-- end
+
+--------<
+-- Sound
+--------<
+
+--Currently on development no sound working yet.
+function OnMsg.SelectedObjChange(obj, prev)
+        if IsKindOf(obj, "ZSpectralAccumulator") then
+                PlayFX("Select", "end", self)
+        end
 end
 
 
---Important function
-function ZSpectraAccumulator:SetStorageState(resource, state, ...)
-    ElectricityStorage.SetStorageState(self, resource, state, ...)
-    if self.working then
-            self:ApplyHeat(false)
-            self:ApplyHeat(true)
-        -- self:GetHeatRange()--self:UpdateHeatingRangeHere() --GetHeatRange()
-    end
-end
-
-
-
-
-
-
-
---function is working, still range not updating by itself.
--- function ZSpectraAccumulator:ApplyHeat(...)
---         --
---         BaseHeater.ApplyHeat(self, ...) -- what do i write here exactly? lol
---                 --
---         end
-
-
-
--- function OnMsg.NewHour()
---         SpectraCurrentHour = UICity.hour -- SpectraCurrentHour gets UICity.Hour
--- end
-
-------------------------------------------------
---Work in progress function
---Logic is Working?
---Not self updating radius yet, game bug?
-------------------------------------------------
-
--- We want to check the charge status of the battery and return a value to
--- update DeltaHeatRadius. How do we get the charge status?
-
--- function ZSpectraAccumulator:DeltaHeatRadius()
---
---         if mode == "full" then
---                 DeltaHeatRadius = 10
---         elseif mode == "charging" or "discharging" then
---                 DeltaHeatRadius = 15
---         else end
---         return DeltaHeatRadius
--- end
-
-
--- function ZSpectraAccumulator:DeltaHeatRadius(time) --Logic debug function
---
---         if SpectraCurrentHour < 5 then
---                 DeltaHeatRadius = 5
---         elseif SpectraCurrentHour > 15 then
---                 DeltaHeatRadius = 20
---         else
---                 DeltaHeatRadius = 10
---         end
---         print(DeltaHeatRadius.." Delta Heat Radius ")--debug
---         RebuildInfopanel(self)
---         return DeltaHeatRadius
--- end
-
---~not sure how this is wokring (time)
-
--- function ZSpectraAccumulator:BuildingUpdate(time)
---         if SpectraCurrentHour < 5 then
---                 DeltaHeatRadius = 5
---         elseif SpectraCurrentHour > 15 then
---                 DeltaHeatRadius = 20
---         else
---                 DeltaHeatRadius = 10
---         end
---         print(DeltaHeatRadius.." Delta Heat Radius ")--debug
---         RebuildInfopanel(self) --
---         return DeltaHeatRadius
--- end
-
-
-
-
--- function ZSpectraAccumulator:ChargeHeatRadius()
---     if self.electricity.charge > 0 then self.GetHeatRange = 20
---     else self.GetHeatRange = 10
--- end
---
--- function SpectraChargeState()
---     SpectraCharging = self.electricity.charge
---     SpectraDischarge = self.electricity.discharge
---
--- end
-
-
-
-
---use this function later to get states
-
--- function ElectricityStorage:SetStorageState(resource, state)
--- 	self.mode = state
--- end
 
 --------------------------------------------
 --Dev advice on how to call another lua code
