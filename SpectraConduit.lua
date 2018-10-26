@@ -34,7 +34,7 @@ DefineClass.ZSpectralConduit = {
                 "StirlingGenerator"
         },
 
-        isCold = false,
+        -- isCold = false,
 
 
 }
