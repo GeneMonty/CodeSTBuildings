@@ -1,8 +1,9 @@
 ![SpectraIMG](githubSmars.jpg)
 
 
-<span style="color: #f2cf4a; font-family: verdana; font-size: 2em;"> Spectra: Mars Division  
-</span>
+<!-- <span style="color: #f2cf4a; font-family: verdana; font-size: 2em;"> Spectra: Mars Division  
+</span> -->
+# Spectra: Mars Division  
 *A **Spectra Technologies** Mod for Surviving Mars Created by: **bullettMAGNETT***
 - - -
 ###### *Release Date: 2018 / 27 Mar @ 11:41pm*
@@ -23,10 +24,10 @@ The progress has been slow but there has been progress & the process of wrapping
 
 In the end, this has become a learning experience that I will continue to work on whenever is possible.  
 
-##### **Support:**
+**Support:**
 - [**Patreon**](https://www.patreon.com/bullettmagnett)
 
-##### **Contact:**
+**Contact:**
 - [**Twitter**](https://twitter.com/bullettmagnett)
 - [**Discord**](https://discord.gg/DyfBpJK)
 
