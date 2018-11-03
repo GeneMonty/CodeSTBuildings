@@ -16,7 +16,7 @@ The following assets(***Mesh/Textures***) are property of **bullettMAGNETT/GeneM
 - Please respect the time we invest in creating these mods.
 - Enjoy the Game and the mods!
 
-### About journey
+### About the journey
 
 The initial inspiration for this mode was, recreating my original Cities Skylines 3D assets in the new **metalness** workflow that Surviving Mars supports and is now an industry standard. Also it was an interesting challenge to motivate myself to get into programming.
 
