@@ -12,22 +12,37 @@ and populate the Spectra Menu and Icon.
 -----------------------------------
 
 
+-- function OnMsg.ClassesBuilt()
+--
+--     stdir = CurrentModPath.."UI/st_menu19.tga" -- Maybe "UI/" if img are diff.
+--
+--     table.insert(
+--         BuildCategories,
+--         {
+--             id ="SPECTRA Build Menu",
+--             name = T{"Spectra: Mars-Division"},
+--             img = stdir, --stdir.."st_menu14.tga" -maybe?
+--             highlight_img = stdir, --stdir.."st_menu19.tga" -maybe?
+--         }
+--     )
+-- end
+
+--
+--Gp Ready Menu
+--
+
+
 function OnMsg.ClassesBuilt()
-
-    stdir = CurrentModPath.."UI/st_menu19.tga" -- Maybe "UI/" if img are diff.
-
-    table.insert(
+        table.insert(
         BuildCategories,
-        {
-            id ="SPECTRA Build Menu",
-            name = T{"Spectra-Mars Division"},
-            img = stdir, --stdir.."st_menu14.tga" -maybe?
-            highlight_img = stdir, --stdir.."st_menu19.tga" -maybe?
-        }
-    )
+                {
+                id ="SPECTRA Building Menu",
+                name = T{"Spectra: Mars-Division"},
+                image = CurrentModPath.."UI/st_menu19.tga",
+                ImageShine = CurrentModPath.."UI/st_menu19.tga",
+                }
+        )
 end
-
-
 
 ---------------------------------
 --Spectra Menu Old Working code
