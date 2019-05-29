@@ -32,7 +32,6 @@ DefineClass.ZSpectraAccumulator = {
     heat = 2*const.MaxHeat,
     utime = const.HourDuration, --Do i need this?
     mode = "charging", -- "empty", "full", "charging", "discharging"
-    working = false
 
 }
 

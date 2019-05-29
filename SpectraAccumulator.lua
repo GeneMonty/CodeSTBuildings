@@ -23,8 +23,10 @@ UI Stuff
 Sound Stuff
         [] Play sound on Selection
         [] Play sound while active
-
-
+Water
+        [] Produce Water 1 cold
+        [] Store water 1 water
+        
 ]]
 
 DefineClass.ZSpectraAccumulator = {
@@ -47,10 +49,10 @@ function ZSpectraAccumulator:GetHeatRange() -- Gets heat range from Values
         local result = 0
 
         if self.mode =="full" then
-                result = 10 * 10 * guim
+                result = 10 * 10 * guim --Range when Full
         elseif self.mode == "charging" or
                 self.mode == "discharging" then
-                result = 10 * 12 * guim
+                result = 10 * 12 * guim --range when Discharging/Charging
         elseif self.mode == "empty"  then
                 result = 0
         end

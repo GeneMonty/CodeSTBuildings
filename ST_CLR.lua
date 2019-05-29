@@ -16,6 +16,11 @@ Simply put The CL will generate water based on the maximum used on the colony, t
 
 *end
 
+water tank that passes electricity
+
+release separate or keep together
+
+
 ]]
 
 DefineClass.zCloseLoop = {

@@ -47,3 +47,8 @@ function Building:StartUpdateThread(randomize_tick)
 		end
 	end, self, randomize_tick)
 end
+
+
+
+
+water tank that passes electricity
